@@ -1,0 +1,13 @@
+MONGO_URI = 'mongodb://localhost:27017/monitoring'
+CORS_ORIGINS = ['*']
+AUTH_REQUIRED = True
+SECRET_KEY = '{{ secret_key.stdout_lines }}'
+OAUTH2_CLIENT_ID = '{{ oauth_client_id }}'
+OAUTH2_CLIENT_SECRET = '{{ oauth_client_secret }}'
+{% if gitlab_auth %}
+GITLAB_URL = '{{ gitlab_url }}'
+ALLOWED_GITLAB_GROUPS = ['*']
+{% endif %}
+
+ALLOWED_GITHUB_ORGS = ['*']
+#ADMIN_USERS = ['googley']

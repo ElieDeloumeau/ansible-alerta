@@ -1,0 +1,93 @@
+---
+- include: mongodb.yml
+
+- name: Install Virtualenv
+  become: true
+  pip:
+    name: virtualenv
+    state: present
+
+- name: Install Alerta.
+  become: true
+  pip:
+    name:
+      - alerta
+      - alerta-server
+    virtualenv: '{{ alerta_dir }}'
+
+- name: Adding Alerta to environment
+  become: true
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    backrefs: yes
+    regexp: 'PATH=(["]*)((?!.*?{{ alerta_dir }}/bin).*?)(["]*)$'
+    line: 'PATH=\1\2:{{ alerta_dir }}/bin\3'
+
+- name: Adding Alerta to profiles
+  become: true
+  lineinfile:
+    dest: /etc/profile.d/alerta.sh
+    create: yes
+    state: present
+    line: "PATH={{ lookup('env','PATH') }}:{{ alerta_dir }}/bin"
+
+- name: Generate secret key
+  shell: cat /dev/urandom | tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+= | head -c 32
+  register: secret_key
+
+- name: Ensure {{ alerta_dir }}/etc dir exists
+  become: true
+  file:
+    path: '{{ alerta_dir }}/etc/'
+    state: directory
+
+- name: Configure Alertad
+  become: true
+  template:
+    src: alertad.conf.j2
+    dest: '{{ alerta_dir }}/etc/alertad.conf'
+    mode: 0644
+
+- name: Ensure {{ alerta_wsgi_dir }} dir exists
+  become: true
+  file:
+    path: '{{ alerta_wsgi_dir }}'
+    state: directory
+
+- name: Configure Alerta WSGI
+  become: true
+  template:
+    src: api.wsgi.j2
+    dest: '{{ alerta_wsgi_dir }}/api.wsgi'
+    mode: 0444
+
+- name: Ensure git is installed
+  become: true
+  apt:
+    name: git
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Purge {{ alerta_ui_dir }}
+  become: true
+  file:
+    path: '{{ alerta_ui_dir }}'
+    state: absent
+
+- name: Install Alerta WebUI
+  become: true
+  git:
+    repo: '{{ alerta_ui_repo }}'
+    dest: '{{ alerta_ui_dir }}'
+    force: yes
+    version: master
+
+- name: Configure Alerta WebUI
+  become: true
+  template:
+    src: config.js.j2
+    dest: '{{ alerta_ui_dir }}/app/config.js'
+    mode: 0444
+
+- include: apache.yml

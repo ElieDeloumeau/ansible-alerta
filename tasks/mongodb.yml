@@ -1,0 +1,37 @@
+---
+# Debian/Ubuntu
+- name: Add MongoDB apt key
+  become: true
+  apt_key:
+    url: '{{ mongodb_gpg }}'
+    state: present
+  when:  ansible_os_family == 'Debian'
+
+- name: Add MongoDB repository
+  become: true
+  apt_repository:
+    repo: '{{ mongodb_repo }}'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install MongoDB
+  become: true
+  apt:
+    name: mongodb-org
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Configure MongoDB
+  become: true
+  lineinfile:
+    dest: /etc/mongodb.conf
+    create: yes
+    regexp: '^smallfile'
+    line: 'smallfiles = true'
+    state: present
+  notify: restart mongodb

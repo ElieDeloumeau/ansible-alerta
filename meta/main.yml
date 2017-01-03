@@ -1,0 +1,27 @@
+---
+# dependencies:
+#   - geerlingguy.apache
+
+galaxy_info:
+    author: Élie DELOUMEAU-PRIGENT
+    license: MIT
+    min_ansible_version: 2.2
+    github_branch: master
+    platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - utopic
+        - vivid
+        - wily
+        - xenial
+        - yakkety
+    - name: Debian
+      versions:
+        - squeeze
+        - stretch
+        - wheezy
+    galaxy_tags:
+      - monitoring
+
+allow_duplicates: yes

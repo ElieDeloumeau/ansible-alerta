@@ -1,0 +1,11 @@
+---
+alerta_ui_repo: https://github.com/alerta/angular-alerta-webui.git
+mongodb_gpg: https://www.mongodb.org/static/pgp/server-3.4.asc
+mongodb_repo: deb http://repo.mongodb.org/apt/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }}/mongodb-org/3.4 {{ 'multiverse' if ansible_distribution|lower == 'ubuntu' else 'main' }}
+# google, github, gitlab or basic
+auth_provider: basic
+
+alerta_dir: /opt/alerta
+alerta_ui_dir: /var/www/alerta
+# Can't be into alerta_ui_dir
+alerta_wsgi_dir: /var/www
