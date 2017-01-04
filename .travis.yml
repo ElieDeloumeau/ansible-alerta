@@ -35,5 +35,5 @@ script:
   - ansible-playbook tests/test.yml --syntax-check
   - ansible-playbook -vvvv tests/test.yml
 
-# notifications:
-#   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
