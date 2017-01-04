@@ -21,7 +21,6 @@ install:
   - sudo apt-get install -y ansible
   - echo 'alerta-test' | sudo tee -a /etc/ansible/hosts
   # Trusty fix
-  - sudo mkdir /etc/apache2
   - sudo touch /etc/apache2/ports.conf
 
   # Check ansible version
