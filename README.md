@@ -1,6 +1,8 @@
 Alerta
 =========
 
+[![Build Status](https://travis-ci.org/googley/ansible-alerta.svg?branch=master)](https://travis-ci.org/googley/ansible-alerta)
+
 This role installs Alerta server, client and UI.
 
 Requirements
