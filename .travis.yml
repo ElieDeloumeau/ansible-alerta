@@ -33,6 +33,7 @@ env:
   - ANSIBLE_HOST_KEY_CHECKING=False
 
 script:
+  - ls -la /etc/apache2/mods-available/
   - ansible-galaxy install -r requirements.yml
   - ansible-playbook tests/test.yml --syntax-check
   - ansible-playbook -vvvv tests/test.yml
