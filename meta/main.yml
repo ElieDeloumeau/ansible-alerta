@@ -5,6 +5,7 @@
 galaxy_info:
     author: Élie DELOUMEAU-PRIGENT
     license: MIT
+    description: This role installs Alerta server, client and UI.
     min_ansible_version: 2.2
     github_branch: master
     platforms:
