@@ -90,4 +90,10 @@
     dest: '{{ alerta_ui_dir }}/app/config.js'
     mode: 0444
 
+- name: Ensure /etc/apache2/ports.conf exists
+  become: true
+  file:
+    path: /etc/apache2/ports.conf
+    state: file
+
 - include: apache.yml
