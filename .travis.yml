@@ -10,15 +10,10 @@ addons:
   apt:
     packages:
     - python-pip
-    - python-urllib3
-    - python-openssl
-    - python-pyasn1
-  # ssh_known_hosts:
-  #   - localhost
 
 install:
   # Install ansible
-  - pip install ansible ndg-httpsclient
+  - pip install ansible
 
   # Check ansible version
   - ansible --version

@@ -4,6 +4,7 @@
   become: true
   apt_key:
     url: '{{ mongodb_gpg }}'
+    validate_certs: no
     state: present
   when:  ansible_os_family == 'Debian'
 
