@@ -34,7 +34,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - ansible-alerta
+         - googley.alerta
 
 Dependencies
 ------------
