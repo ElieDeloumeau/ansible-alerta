@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: alerta-test
+  connection: local
+  become: true
+  become_method: sudo
   roles:
-    - ../../ansible-alerta
+    - ansible-alerta
