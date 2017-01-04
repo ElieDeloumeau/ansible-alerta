@@ -31,6 +31,7 @@
     create: yes
     state: present
     line: "PATH={{ lookup('env','PATH') }}:{{ alerta_dir }}/bin"
+    mode: 0777
 
 - name: Generate secret key
   shell: cat /dev/urandom | tr -dc A-Za-z0-9_\!\@\#\$\%\^\&\*\(\)-+= | head -c 32

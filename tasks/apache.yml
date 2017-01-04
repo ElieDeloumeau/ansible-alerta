@@ -20,6 +20,8 @@
             Require all granted
           </Directory>
     apache_packages:
+      - apache2
+      - apache2-utils
       - libapache2-mod-wsgi
     apache_mods_enabled:
       - proxy.load

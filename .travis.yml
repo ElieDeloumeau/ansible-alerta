@@ -20,8 +20,6 @@ install:
   - sudo apt-get update -y >/dev/null
   - sudo apt-get install -y ansible
   - echo 'alerta-test' | sudo tee -a /etc/ansible/hosts
-  # Trusty fix
-  - sudo touch /etc/apache2/ports.conf
 
   # Check ansible version
   - ansible --version
@@ -33,9 +31,6 @@ env:
   - ANSIBLE_HOST_KEY_CHECKING=False
 
 script:
-  - ls -la /etc/apache2/
-  - ls -la /etc/apache2/mods-available/
-  - apache2ctl -M
   - ansible-galaxy install -r requirements.yml
   - ansible-playbook tests/test.yml --syntax-check
   - ansible-playbook -vvvv tests/test.yml
