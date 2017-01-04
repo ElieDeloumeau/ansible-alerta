@@ -12,14 +12,13 @@ addons:
     - python-pip
     - python-urllib3
     - python-openssl
-    - python-ndg-httpsclient
     - python-pyasn1
   # ssh_known_hosts:
   #   - localhost
 
 install:
   # Install ansible
-  - pip install ansible
+  - pip install ansible ndg-httpsclient
 
   # Check ansible version
   - ansible --version
