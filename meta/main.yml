@@ -1,6 +1,6 @@
 ---
-# dependencies:
-#   - geerlingguy.apache
+dependencies:
+  - geerlingguy.apache
 
 galaxy_info:
     author: Élie DELOUMEAU-PRIGENT
