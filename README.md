@@ -5,14 +5,20 @@ Alerta
 
 This role installs Alerta server, client and UI.
 
+Install
+-------
+
+```shell
+ansible-galaxy install googley.alerta
+```
+
 Requirements
 ------------
 
 * Ansible 2.2
+* Debian 7/8 or Ubuntu 14.04 and higher
 
-You need to install requirements :
-
-`ansible-galaxy install -r requirements.yml`
+### 
 
 Role Variables
 --------------
